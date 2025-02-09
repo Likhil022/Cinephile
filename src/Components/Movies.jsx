@@ -33,16 +33,18 @@ const Movies = ({ searchQuery }) => {
           No movies found for &quot;{searchQuery}&quot; 😞
         </div>
       )}
-      <div className="flex items-center flex-col">
-        Movies
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-14 p-5 list-none ">
-          {data.map((curEle) => (
-            <li key={curEle.imdbID}>
-              <MovieCard Movie={curEle} />
-            </li>
-          ))}
+      {searchQuery && (
+        <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
+          Movies
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-14 p-5 list-none ">
+            {data.map((curEle) => (
+              <li key={curEle.imdbID}>
+                <MovieCard Movie={curEle} />
+              </li>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
