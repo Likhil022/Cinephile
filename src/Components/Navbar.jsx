@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import favicon from "../../public/favicon.ico";
 import PropTypes from "prop-types";
 import Search from "./Search";
 const Navbar = ({ setSearchQuery }) => {
@@ -22,7 +23,10 @@ const Navbar = ({ setSearchQuery }) => {
             searchToggle ? "-translate-y-32 ease-in-out" : "translate-y-0"
           }}`}
         >
-          <h1 className="animate-bounceCustom">Cinephile</h1>
+          <div className="flex gap-[3px]">
+            <img src={favicon} className="h-6 w-6" alt="logo" srcset="" />
+            <h1 className="animate-bounceCustom">inephile</h1>
+          </div>
           <ul className="flex gap-12 justify-end w-[50%] ">
             <li
               className="animate-bounceCustom cursor-pointer"
