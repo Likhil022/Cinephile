@@ -12,11 +12,12 @@ const Movies = ({ searchQuery }) => {
     if (!searchQuery) return;
     const fetchData = async () => {
       let response = await axios.get(
-        `https://www.omdbapi.com/?s=${searchQuery}&apikey=a7c9fc73`
+        `https://cinephile-backend.vercel.app/movies?query=${searchQuery}`
       );
-      console.log(response.data.Search);
-      if (response.data.Search) {
-        setData(response.data.Search);
+      console.log(response.data.results);
+      if (response.data.results) {
+        setData(response.data.results);
+
         setShowPopup(false); // Hide popup if movies are found
       } else {
         setData([]);
@@ -35,8 +36,8 @@ const Movies = ({ searchQuery }) => {
       )}
       {searchQuery && (
         <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
-          Movies
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-14 p-5 list-none ">
+          <span className="my-5">Movies</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-14 p-5 list-none ">
             {data.map((curEle) => (
               <li key={curEle.imdbID}>
                 <MovieCard Movie={curEle} />

@@ -1,5 +1,10 @@
+import Search from "./Search";
 const Hero = () => {
-  return <div>Hero</div>;
+  return (
+    <div>
+      <Search />
+    </div>
+  );
 };
 
 export default Hero;
