@@ -18,7 +18,7 @@ const MovieCard = ({ Movie }) => {
           }
           alt={Movie.title}
           className={`object-cover relative rounded-2xl h-96 w-72 transform transition-transform duration-300 ${
-            isHovered ? "scale-100" : "scale-105"
+            isHovered ? "scale-100" : "scale-110"
           }`}
         />
         <div
