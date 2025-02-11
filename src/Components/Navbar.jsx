@@ -24,7 +24,7 @@ const Navbar = ({ setSearchQuery }) => {
           }}`}
         >
           <div className="flex gap-[3px]">
-            <img src={favicon} className="h-6 w-6" alt="logo" srcset="" />
+            <img src={favicon} className="h-6 w-6" alt="logo" />
             <h1 className="animate-bounceCustom">inephile</h1>
           </div>
           <ul className="flex gap-12 justify-end w-[50%] ">
