@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { useState, useEffect } from "react";
 import favicon from "../../public/favicon.ico";
 import PropTypes from "prop-types";
@@ -23,17 +25,18 @@ const Navbar = ({ setSearchQuery }) => {
             searchToggle ? "-translate-y-32 ease-in-out" : "translate-y-0"
           }}`}
         >
-          <div className="flex gap-[3px]">
+          <Link to="/" className="flex gap-[3px]">
             <img src={favicon} className="h-6 w-6" alt="logo" />
             <h1 className="animate-bounceCustom">inephile</h1>
-          </div>
+          </Link>
           <ul className="flex gap-12 justify-end w-[50%] ">
-            <li
+            <Link
+              to="/"
               className="animate-bounceCustom cursor-pointer"
               style={{ animationDelay: "200ms" }}
             >
               Home
-            </li>
+            </Link>
             <li
               className="animate-bounceCustom cursor-pointer"
               style={{ animationDelay: "400ms" }}
