@@ -9,7 +9,7 @@ const MovieCard = ({ Movie }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-96 w-72">
+      <div className="relative h-96 w-72 overflow-hidden rounded-2xl transform transition-transform duration-300 hover:scale-105">
         <img
           src={
             Movie.poster_path
@@ -17,7 +17,9 @@ const MovieCard = ({ Movie }) => {
               : "https://via.placeholder.com/500x750?text=No+Image"
           }
           alt={Movie.title}
-          className="object-cover relative rounded-2xl h-96 w-72"
+          className={`object-cover relative rounded-2xl h-96 w-72 transform transition-transform duration-300 ${
+            isHovered ? "scale-100" : "scale-105"
+          }`}
         />
         <div
           className={`absolute top-0  border-white w-72 min-h-96 bg-black bg-opacity-70 rounded-2xl z-10 ${

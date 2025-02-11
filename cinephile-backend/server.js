@@ -15,9 +15,7 @@ app.get("/", (req, res) => {
   res.send("Cinephile Backend is Running!");
 });
 
-app.get("/", (req, res) => {
-  res.send("Cinephile Backend is Running!");
-});
+//movies routes
 
 app.get("/movies", async (req, res) => {
   try {
@@ -34,6 +32,21 @@ app.get("/movies", async (req, res) => {
   }
 });
 
+//individual movie route
+app.get("/movies/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await axios.get(`${BASE_URL}movie/${id}`, {
+      params: { api_key: TMDB_API_KEY },
+    });
+    console.log(response.data);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//route for trending
 app.get("/trending", async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}trending/movie/day`, {

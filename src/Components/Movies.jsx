@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import MovieCard from "./MovieCard";
 
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Movies = ({ searchQuery }) => {
   console.log("in movies:" + searchQuery);
@@ -54,30 +55,16 @@ const Movies = ({ searchQuery }) => {
           No movies found for &quot;{searchQuery}&quot; 😞
         </div>
       )}
-      {!searchQuery && (
-        <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
-          <span className="my-5">Trending</span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-14 p-5 list-none ">
-            {data.map((curEle) => (
-              <li key={curEle.imdbID}>
-                <MovieCard Movie={curEle} />
-              </li>
-            ))}
-          </div>
+      <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
+        <span className="my-5">{searchQuery ? "Movies" : "Trending"}</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-14 p-5 list-none ">
+          {data.map((curEle) => (
+            <Link key={curEle.id} to={`/movies/${curEle.id}`}>
+              <MovieCard Movie={curEle} />
+            </Link>
+          ))}
         </div>
-      )}
-      {searchQuery && (
-        <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
-          <span className="my-5">Movies</span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-14 p-5 list-none ">
-            {data.map((curEle) => (
-              <li key={curEle.imdbID}>
-                <MovieCard Movie={curEle} />
-              </li>
-            ))}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };
