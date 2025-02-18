@@ -14,7 +14,7 @@ const Movies = ({ searchQuery }) => {
     let response = await axios.get(
       `https://cinephile-backend.vercel.app/movies?query=${searchQuery}`
     );
-    console.log(response.data.results);
+    // console.log(response.data.results);
     if (response.data.results) {
       setData(response.data.results);
 
@@ -29,7 +29,7 @@ const Movies = ({ searchQuery }) => {
     let response = await axios.get(
       `https://cinephile-backend.vercel.app/trending`
     );
-    console.log(response.data.results);
+    // console.log(response.data.results);
     if (response.data.results) {
       setData(response.data.results);
       setShowPopup(false);

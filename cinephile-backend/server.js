@@ -46,6 +46,19 @@ app.get("/movies/:id", async (req, res) => {
   }
 });
 
+//route for cast and crew
+app.get("/movies/:id/credits", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await axios.get(`${BASE_URL}movie/${id}/credits`, {
+      params: { api_key: TMDB_API_KEY },
+    });
+    console.log(response.data);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch cast details" + error });
+  }
+});
 //route for trending
 app.get("/trending", async (req, res) => {
   try {
