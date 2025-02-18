@@ -7,26 +7,23 @@ const MovieDetails = () => {
   const [movie, setMovieDetaisl] = useState({});
   const [crew, setCrewData] = useState([]);
   const { id } = useParams();
+
   useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(
+        `https://cinephile-backend.vercel.app/movies/${id}`
+      );
+      setMovieDetaisl(response.data);
+    }
+    async function fetchCrew() {
+      const response = await axios.get(
+        `https://cinephile-backend.vercel.app/movies/${id}/credits`
+      );
+      setCrewData(response.data.cast);
+    }
     fetchData();
     fetchCrew();
   }, [id]);
-
-  async function fetchData() {
-    const response = await axios.get(
-      `https://cinephile-backend.vercel.app/movies/${id}`
-    );
-    // console.log(response.data);
-    setMovieDetaisl(response.data);
-  }
-  async function fetchCrew() {
-    const response = await axios.get(
-      `https://cinephile-backend.vercel.app/movies/${id}/credits`
-    );
-    console.log(response.data);
-    setCrewData(response.data);
-    console.log("hello" + crew.cast[0]);
-  }
 
   if (!movie) return <h2 className="text-white text-center">Loading...</h2>;
 
@@ -71,11 +68,13 @@ const MovieDetails = () => {
         </div>
       </div>
       <div>
-        <h3>Cast & Crew</h3>
-        <div>
-          {/* {crew.map((crewD) => (
-            <CrewCard key={crewD.id} crew={crewD} />
-          ))} */}
+        <h3 className="text-center text-white  mx-96 p-10">Cast & Crew</h3>
+        <div className="">
+          <div className="flex flex-wrap ml-36 gap-10">
+            {crew.map((crewD) => (
+              <CrewCard key={crewD.id} crew={crewD} className="w-56" />
+            ))}
+          </div>
         </div>
       </div>
     </>
