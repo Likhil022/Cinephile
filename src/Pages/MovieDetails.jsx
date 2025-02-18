@@ -70,7 +70,7 @@ const MovieDetails = () => {
       <div>
         <h3 className="text-center text-white  mx-96 p-10">Cast & Crew</h3>
         <div className="">
-          <div className="flex flex-wrap ml-36 gap-10">
+          <div className="flex flex-wrap justify-center items-center gap-10">
             {crew.map((crewD) => (
               <CrewCard key={crewD.id} crew={crewD} className="w-56" />
             ))}
