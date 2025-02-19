@@ -6,6 +6,7 @@ import CrewCard from "../Components/CrewCard";
 const MovieDetails = () => {
   const [movie, setMovieDetaisl] = useState({});
   const [crew, setCrewData] = useState([]);
+  const [active, setActive] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,11 +20,18 @@ const MovieDetails = () => {
       const response = await axios.get(
         `https://cinephile-backend.vercel.app/movies/${id}/credits`
       );
-      setCrewData(response.data.cast);
+      const data = active ? response.data.cast : response.data.crew;
+
+      // Filter out duplicates based on 'id' (assuming 'id' is unique per person)
+      const uniqueData = Array.from(
+        new Map(data.map((item) => [item.id, item])).values()
+      );
+
+      setCrewData(uniqueData);
     }
     fetchData();
     fetchCrew();
-  }, [id]);
+  }, [id, active]);
 
   if (!movie) return <h2 className="text-white text-center">Loading...</h2>;
 
@@ -67,11 +75,32 @@ const MovieDetails = () => {
           </p>
         </div>
       </div>
-      <div>
-        <h3 className="text-center text-white  mx-96 p-10">Cast & Crew</h3>
-        <div className="flex flex-wrap justify-center items-center gap-10">
+      <div className=" flex justify-center flex-col items-center font-poppins">
+        <div className="text-center text-white my-16 w-72 flex px-2 gap-2 text-3xl  bg-white text-black rounded-lg">
+          <h3
+            onClick={() => setActive(!active)}
+            className={`h-16 w-32 m-1 text-center pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer ${
+              active ? "bg-black text-white translate-x-1 opacity-100" : ""
+            }`}
+          >
+            Cast
+          </h3>
+          <h3
+            onClick={() => setActive(!active)}
+            className={`h-16 w-32 m-1 text-center pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer ${
+              !active ? "bg-black text-white -translate-x-1 opacity-100" : ""
+            }`}
+          >
+            Crew
+          </h3>
+        </div>
+        <div
+          className={`grid grid-cols-4 gap-10 transition delay-150 duration-300 ease-in-out ${
+            active ? "translate-x-4 opacity-100" : "-translate-x-4 opacity-100"
+          }`}
+        >
           {crew.map((crewD) => (
-            <CrewCard key={crewD.id} crew={crewD} />
+            <CrewCard key={crewD.id} crew={crewD} active={active} />
           ))}
         </div>
       </div>
