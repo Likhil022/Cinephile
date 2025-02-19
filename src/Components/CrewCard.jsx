@@ -18,7 +18,7 @@ const CrewCard = ({ crew }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       />
-      <div className="w-screen mt-5">
+      <div className=" mt-5">
         <h3 className="text-xl">{crew.character}</h3>
         <p>{crew.original_name}</p>
       </div>
