@@ -79,7 +79,7 @@ const MovieDetails = () => {
         <div className="text-center text-white my-16 w-72 flex px-2 gap-2 text-3xl  bg-white text-black rounded-lg">
           <h3
             onClick={() => setActive(!active)}
-            className={`h-16 w-32 m-1 text-center pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer ${
+            className={`h-16 w-32 m-1 text-center text-black pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer ${
               active ? "bg-black text-white translate-x-1 opacity-100" : ""
             }`}
           >
@@ -87,7 +87,7 @@ const MovieDetails = () => {
           </h3>
           <h3
             onClick={() => setActive(!active)}
-            className={`h-16 w-32 m-1 text-center pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer ${
+            className={`h-16 w-32 m-1 text-center text-black pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer ${
               !active ? "bg-black text-white -translate-x-1 opacity-100" : ""
             }`}
           >

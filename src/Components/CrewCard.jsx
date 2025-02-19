@@ -1,10 +1,15 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CrewCard = ({ crew, active }) => {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="text-white w-72 flex flex-col justify-center items-center">
+    <div
+      className="text-white w-72 flex flex-col justify-center items-center"
+      onClick={() => navigate(`/person/${crew.id}`)}
+    >
       <img
         src={
           crew.profile_path
@@ -31,6 +36,7 @@ const CrewCard = ({ crew, active }) => {
 };
 CrewCard.propTypes = {
   crew: PropTypes.object.isRequired,
+  active: PropTypes.bool.isRequired,
 };
 
 export default CrewCard;

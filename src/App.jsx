@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Movies from "./Components/Movies";
+import CrewDetails from "./Pages/CrewDetails";
 
 import MovieDetails from "./Pages/MovieDetails";
 
@@ -10,12 +11,13 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
   return (
     <Router>
-      <div className="bg-gray-700 min-h-screen">
+      <div className="bg-gray-700 min-h-screen overflow-hidden ">
         <Navbar setSearchQuery={setSearchQuery} />
         <Routes>
           {/* <Hero /> */}
           <Route path="/" element={<Movies searchQuery={searchQuery} />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
+          <Route path="/person/:id" element={<CrewDetails />} />
         </Routes>
       </div>
     </Router>

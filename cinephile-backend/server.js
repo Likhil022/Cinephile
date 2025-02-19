@@ -15,8 +15,19 @@ app.get("/", (req, res) => {
   res.send("Cinephile Backend is Running!");
 });
 
-//movies routes
+//route for trending
+app.get("/trending", async (req, res) => {
+  try {
+    const response = await axios.get(`${BASE_URL}trending/movie/day`, {
+      params: { api_key: TMDB_API_KEY },
+    });
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
+//movies routes
 app.get("/movies", async (req, res) => {
   try {
     const query = req.query.query;
@@ -59,15 +70,17 @@ app.get("/movies/:id/credits", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch cast details" + error });
   }
 });
-//route for trending
-app.get("/trending", async (req, res) => {
+
+app.get("/person/:id", async (req, res) => {
   try {
-    const response = await axios.get(`${BASE_URL}trending/movie/day`, {
+    const { id } = req.params;
+    const response = await axios.get(`${BASE_URL}person/${id}`, {
       params: { api_key: TMDB_API_KEY },
     });
+    console.log(response.data);
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "Failed to fetch person detaisl" + error });
   }
 });
 
