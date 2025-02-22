@@ -84,4 +84,18 @@ app.get("/person/:id", async (req, res) => {
   }
 });
 
+//persons movies
+app.get("/person/:id/movies", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await axios.get(`${BASE_URL}person/${id}/movie_credits`, {
+      params: { api_key: TMDB_API_KEY },
+    });
+    console.log(response.data);
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch person movies" + error });
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
