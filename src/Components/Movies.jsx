@@ -57,7 +57,13 @@ const Movies = () => {
         </div>
       )}
       <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
-        <span className="my-5">{query ? "Movies" : "Trending"}</span>
+        <div className="text-center text-white my-16 w-fit flex pr-2 gap-2 text-3xl  bg-white text-black rounded-lg">
+          <h3
+            className={`h-16 w-32 m-1 text-center text-black pt-[0.85rem] rounded-lg transition delay-150 duration-300 ease-in-out cursor-pointer font-poppins font-medium translate-x-1 opacity-100`}
+          >
+            {query ? "Movies" : "Trending"}
+          </h3>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-14 p-5 list-none ">
           {data.map((curEle) => (
             <Link key={curEle.id} to={`/movies/${curEle.id}`}>
