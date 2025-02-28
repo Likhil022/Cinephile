@@ -1,18 +1,27 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import MovieCard from "./MovieCard";
+import { useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Movies = ({ searchQuery }) => {
-  console.log("in movies:" + searchQuery);
+const Movies = () => {
   const [data, setData] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query");
+
+  useEffect(() => {
+    if (query) {
+      fetchMovies();
+    } else {
+      fetchTrending();
+    }
+  }, [query]);
 
   const fetchMovies = async () => {
     let response = await axios.get(
-      `https://cinephile-backend.vercel.app/movies?query=${searchQuery}`
+      `https://cinephile-backend.vercel.app/movies?query=${query}`
     );
     // console.log(response.data.results);
     if (response.data.results) {
@@ -39,24 +48,16 @@ const Movies = ({ searchQuery }) => {
     }
   };
 
-  useEffect(() => {
-    if (!searchQuery) {
-      fetchTrending();
-      return;
-    }
-    fetchMovies();
-  }, [searchQuery]);
-
   return (
     <div className="p-5">
       {/* Popup Message */}
       {showPopup && (
         <div className="fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-md shadow-lg transition-opacity duration-500">
-          No movies found for &quot;{searchQuery}&quot; 😞
+          No movies found for &quot;{query}&quot; 😞
         </div>
       )}
       <div className="flex items-center flex-col text-white text-poppins text-2xl mt-5">
-        <span className="my-5">{searchQuery ? "Movies" : "Trending"}</span>
+        <span className="my-5">{query ? "Movies" : "Trending"}</span>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-14 p-5 list-none ">
           {data.map((curEle) => (
             <Link key={curEle.id} to={`/movies/${curEle.id}`}>
@@ -67,10 +68,6 @@ const Movies = ({ searchQuery }) => {
       </div>
     </div>
   );
-};
-
-Movies.propTypes = {
-  searchQuery: PropTypes.string.isRequired,
 };
 
 export default Movies;

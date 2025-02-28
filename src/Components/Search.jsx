@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Search = ({ setSearchToggle, searchToggle, setSearchQuery }) => {
   const [search, setSearch] = useState(false);
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   // Focus input when searchToggle is true
   useEffect(() => {
@@ -26,6 +28,7 @@ const Search = ({ setSearchToggle, searchToggle, setSearchQuery }) => {
       setSearchToggle(!searchToggle);
       console.log(e.target.value);
       setSearchQuery(e.target.value);
+      navigate(`/movies?query=${encodeURIComponent(e.target.value)}`);
     }
   };
 
