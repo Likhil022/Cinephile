@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import favicon from "../../public/favicon.ico";
+import menu from "../../public/menu.svg";
 import PropTypes from "prop-types";
 import Search from "./Search";
+
 const Navbar = ({ setSearchQuery }) => {
   const [searchToggle, setSearchToggle] = useState(false);
   const [delaySearch, setDelaySearch] = useState(false);
+  const [menuActive, setMenuActive] = useState(true);
 
   useEffect(() => {
     let timeout;
@@ -21,7 +24,7 @@ const Navbar = ({ setSearchQuery }) => {
     <div>
       {
         <div
-          className={`flex justify-between px-32 py-5 bg-gray-800 text-white font-poppins text-lg border-b-[2px] border-white animate-borderColorChange transition-transform duration-900 ease-in-out ${
+          className={`flex justify-between px-32 pr-24 py-5 bg-gray-800 text-white font-poppins text-lg border-b-[2px] border-white animate-borderColorChange transition-transform duration-900 ease-in-out ${
             searchToggle ? "-translate-y-32 ease-in-out" : "translate-y-0"
           }}`}
         >
@@ -29,30 +32,49 @@ const Navbar = ({ setSearchQuery }) => {
             <img src={favicon} className="h-6 w-6" alt="logo" />
             <h1 className="animate-bounceCustom">inephile</h1>
           </Link>
-          <ul className="flex gap-12 justify-end w-[50%] ">
-            <Link
-              to="/"
-              className="animate-bounceCustom cursor-pointer"
-              style={{ animationDelay: "200ms" }}
-            >
-              Home
-            </Link>
-            <li
-              className="animate-bounceCustom cursor-pointer"
-              style={{ animationDelay: "400ms" }}
-            >
-              About
-            </li>
-            <li
-              className="animate-bounceCustom  cursor-pointer"
-              style={{ animationDelay: "600ms" }}
-              onClick={() => {
-                setSearchToggle(!searchToggle);
-              }}
-            >
-              Search
-            </li>
-          </ul>
+
+          <div className="flex gap-8">
+            {menuActive && (
+              <ul className="md:flex gap-12 w-[50%] hidden ">
+                <Link
+                  to="/"
+                  className="animate-bounceCustom cursor-pointer"
+                  style={{ animationDelay: "200ms" }}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/about"
+                  className="animate-bounceCustom cursor-pointer"
+                  style={{ animationDelay: "400ms" }}
+                >
+                  About
+                </Link>
+                <Link
+                  to="/Search"
+                  className="animate-bounceCustom  cursor-pointer"
+                  style={{ animationDelay: "600ms" }}
+                  onClick={() => {
+                    setSearchToggle(!searchToggle);
+                  }}
+                >
+                  Search
+                </Link>
+              </ul>
+            )}
+            <div className="md:flex hidden h-8 w-8 justify-between">
+              <img
+                src={menu}
+                alt="hamburger menu"
+                className={`fill-white w-full h-full invert translate-x-24 -mt-[2px] ${
+                  menuActive
+                    ? "-translate-x-22"
+                    : "-translate-x-24 transition-all ease-in-out"
+                }`}
+                onClick={() => setMenuActive(!menuActive)}
+              />
+            </div>
+          </div>
         </div>
       }
       <div

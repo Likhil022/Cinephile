@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Search = ({ setSearchToggle, searchToggle, setSearchQuery }) => {
   const [search, setSearch] = useState(false);
@@ -62,12 +62,13 @@ const Search = ({ setSearchToggle, searchToggle, setSearchQuery }) => {
         />
       </div>
 
-      <button
+      <Link
+        to={`/`}
         className="text-5xl bg-gray-800 bg-opacity-50 text-white"
         onClick={() => setSearchToggle(!searchToggle)}
       >
         X
-      </button>
+      </Link>
     </div>
   );
 };
